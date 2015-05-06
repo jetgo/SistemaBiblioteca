@@ -50,6 +50,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         btnActualizarUsuario.setFocusable(false);
         btnActualizarUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnActualizarUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnActualizarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarUsuarioActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnActualizarUsuario);
 
         btnMantenedorUsuario.setText("Mantenedor de Usuarios");
@@ -188,6 +193,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         dtpContenedor.add(reporteActividad);
         reporteActividad.show();
     }//GEN-LAST:event_btnReporteActividadActionPerformed
+
+    private void btnActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarUsuarioActionPerformed
+        InterfazActualizarUsuario actualizarUsuario=new InterfazActualizarUsuario();
+        dtpContenedor.add(actualizarUsuario);
+        actualizarUsuario.show();
+    }//GEN-LAST:event_btnActualizarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

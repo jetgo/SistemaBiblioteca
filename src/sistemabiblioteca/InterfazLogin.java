@@ -16,34 +16,17 @@ import javax.swing.JOptionPane;
  */
 public class InterfazLogin extends javax.swing.JFrame {
 
-    ArrayList<Usuario> listaUsuario =new ArrayList<Usuario>(); //Creando ArrayList
+    ArrayList<Usuario> listaUsuario=new Main().lista();
+    
     /**
      * Creates new form Login
      */
     public InterfazLogin() {
         initComponents();
-        Usuario A=new Usuario("15979446", "david", "villegas", "david@gmailcom", "1234");
-        listaUsuario.add(A);
-        btnInicioSesion.setEnabled(false);
     }
 
-    public void setVisiblePanelAlumno(boolean valor){
-        pnlRegistroAlumno.setVisible(valor);
-        //btnInicioSesion.setEnabled(false);
-    }
-    public void mostrarAdvertencia(String mensaje){
-        JOptionPane.showMessageDialog(this, mensaje);
-    }
-    public void limpiarTodo(){
-        txtRutUsuario.setText("");
-        txtPasswordUsuario.setText("");
-        txtRut.setText("");
-        txtNombre.setText("");
-        txtApellido.setText("");
-        txtCorreo.setText("");
-        cbbCarrera.setSelectedIndex(0);
-        txtPassword.setText("");
-    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -270,41 +253,91 @@ public class InterfazLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void limpiarTodo(){
+        txtRutUsuario.setText("");
+        txtPasswordUsuario.setText("");
+        txtRut.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtCorreo.setText("");
+        cbbCarrera.setSelectedIndex(0);
+        txtPassword.setText("");
+        txtRepetirPassword.setText("");
+    }
+    
+    public void setVisiblePanelAlumno(boolean valor){
+        pnlRegistroAlumno.setVisible(valor);
+    }
+    public void mostrarAdvertencia(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+    
+    public boolean existeRut(String rut){
+        boolean existeRut = false;
+        try {
+            for (Usuario iUsuario : listaUsuario) {
+                if(rut.equals(iUsuario.getRut()))
+                {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
+        }
+        return existeRut;
+    }
+    
+    public boolean coincidePassword(String rut, String password){
+        boolean coincide = false;
+        try {
+            for (Usuario iUsuario : listaUsuario) {
+                if(rut.equals(iUsuario.getRut()))
+                {
+                    if(password.equals(iUsuario.getPassword()))
+                    {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
+        }
+        return coincide;
+    }
+    
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
         
-        String rut=txtRutUsuario.getText();
-        String password=String.valueOf(txtPasswordUsuario.getPassword());
-        
-        
-        if(rut.equals("")||password.equals("")){
+        String rut="";
+        String password="";
+        if(txtRutUsuario.getText().equals("")||String.valueOf(txtPasswordUsuario.getPassword()).equals("")){
             mostrarAdvertencia("Ingrese su RUT y PASSWORD");
         }   
         else{
-            try {
-                for (Usuario iUsuario : listaUsuario) {
-                    if(iUsuario.getRut().equals(rut))
-                    {
-                        if(iUsuario.getPassword().equals(password))
-                        {
-                            JFrame ventanaPrincipal= new InterfazPrincipal();
-                            ventanaPrincipal.setLocationRelativeTo(null);
-                            ventanaPrincipal.setVisible(true);
-                            this.dispose();
-                        }else{
-                            mostrarAdvertencia("Su Password es Incorrecto");
-                            return;
-                        }
+            if(Usuario.validarRut(txtRutUsuario.getText())==false)
+            {
+                mostrarAdvertencia("Rut no es valido = ".concat(txtRutUsuario.getText()));
+            }else{
+                try {
+                    rut = txtRutUsuario.getText();
+                    rut = rut.toUpperCase();
+                    rut = rut.replace(".", "");
+                    rut = rut.replace("-", "");
+                    password= String.valueOf(txtPasswordUsuario.getPassword());
+
+                    if(coincidePassword(rut,password)){
+                        InterfazPrincipal ventanaPrincipal= new InterfazPrincipal();
+                        ventanaPrincipal.setLocationRelativeTo(null);
+                        ventanaPrincipal.setVisible(true);
+                        this.dispose();
                     }else{
-                        mostrarAdvertencia("Su Usuario no Existe");
-                        return;
-                    }    
-                } 
-            } catch (Exception e) {
-                mostrarAdvertencia("Upss, Ocurrio un error inesperado!!! = " + e.getMessage());
+                        mostrarAdvertencia("Su Usuario o Contraseña son Incorrectos");
+                    }
+
+                } catch (Exception e) {
+                    mostrarAdvertencia("Upss, Ocurrio un error inesperado!!! = " + e.getMessage());
+                }
             }
         }
-        
-        
         
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
@@ -321,58 +354,94 @@ public class InterfazLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFormularioRegistroActionPerformed
 
     private void btnRecuperarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecuperarPasswordActionPerformed
-        JDialog recuperar=new InterfazRecuperarPassword(this,true);
+        InterfazRecuperarPassword recuperar=new InterfazRecuperarPassword(this,true);
+        recuperar.SetTextoRut(txtRutUsuario.getText());
         recuperar.setLocationRelativeTo(this);
         recuperar.setVisible(true);
     }//GEN-LAST:event_btnRecuperarPasswordActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        btnInicioSesion.setEnabled(true);
+        
         boolean banderaRegistro=true;
         String rut="";
         String nombre="";
+        String apellido="";
+        String correo="";
         String password="";
         String repetirPass="";
+        String carrera="";
         if(txtRut.getText().equals("")){ banderaRegistro=false;} 
-        else {rut=txtRut.getText();}
+        else {
+            if(Usuario.validarRut(txtRut.getText())==false)
+            {
+                mostrarAdvertencia("Rut no es valido = ".concat(txtRut.getText()));
+                banderaRegistro=false;
+            }else{
+                rut=txtRut.getText();
+                rut =  rut.toUpperCase();
+                rut = rut.replace(".", "");
+                rut = rut.replace("-", "");
+            }
+        }
         if(txtNombre.getText().equals("")){ banderaRegistro=false;} 
         else {nombre=txtNombre.getText();}
         if(txtApellido.getText().equals("")){ banderaRegistro=false;}
-        else {String apellido=txtApellido.getText();}
+        else {apellido=txtApellido.getText();}
         if(txtCorreo.getText().equals("")){ banderaRegistro=false;} 
-        else {String correo=txtCorreo.getText();}
+        else {
+            if (txtCorreo.getText().matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
+                correo=txtCorreo.getText();
+            }else{
+                mostrarAdvertencia("Ingrese un correo Valido");
+                banderaRegistro=false;
+            }
+        }
         if(String.valueOf(txtPassword.getPassword()).equals("")){ banderaRegistro=false;}
-        else {password=String.valueOf(txtPassword.getPassword());}
+        else {
+            
+            if(String.valueOf(txtPassword.getPassword()).length()<4)
+            {
+                mostrarAdvertencia("Contraseña debe ser mayor a 4 caracteres");
+                banderaRegistro=false;
+            }else{
+                password=String.valueOf(txtPassword.getPassword());
+            }
+        }
         if(String.valueOf(txtRepetirPassword.getPassword()).equals("")){ banderaRegistro=false;} 
-        else {repetirPass=String.valueOf(txtRepetirPassword.getPassword());}
+        else {
+            if(String.valueOf(txtRepetirPassword.getPassword()).equals(String.valueOf(txtPassword.getPassword())))
+            {
+                repetirPass=String.valueOf(txtRepetirPassword.getPassword());
+            }else{
+                mostrarAdvertencia("Debe Repetir la misma Contraseña");
+                banderaRegistro=false;
+            }
+        }
         if (cbbCarrera.getSelectedIndex()==0) {
             banderaRegistro=false;
         } else {
-            String carrera=String.valueOf(cbbCarrera.getSelectedItem());
+            carrera=String.valueOf(cbbCarrera.getSelectedItem());
         }
-        if(rut.length()<9)
-        {
-            mostrarAdvertencia("Rut no es valido");
-        }
-        if(password.length()<4)
-        {
-            mostrarAdvertencia("Contraseña debe ser mayor a 4 caracteres");
-        }
+        
         if(banderaRegistro==false)
         {
             mostrarAdvertencia("Favor, llene todos los campos");
         }else{
-            
-            
-            mostrarAdvertencia("Todos los campos llenos");
+            if(existeRut(rut)==false){
+                Usuario registroUsuario= new Usuario(rut, nombre, apellido, correo, password, carrera);
+                listaUsuario.add(registroUsuario);
+                mostrarAdvertencia("Registro Completado Satisfactoriamente");
+                limpiarTodo();
+            }else{
+                mostrarAdvertencia("RUT ya existe en la Base de Datos");
+            }
         }
         
-        
-        
-        //Usuario registroUsuario= new Usuario(rut, nombre, apellido, correo, password, carrera);
-        //listaUsuario.add(registroUsuario);
+        for (Usuario listaUsuario1 : listaUsuario) {
+            System.out.println(listaUsuario1.getRut());
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
-
+    
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiarTodo();
     }//GEN-LAST:event_btnLimpiarActionPerformed

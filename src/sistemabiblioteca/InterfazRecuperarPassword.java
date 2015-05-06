@@ -5,7 +5,10 @@
  */
 package sistemabiblioteca;
 
+import clase.Usuario;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -13,6 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class InterfazRecuperarPassword extends javax.swing.JDialog {
 
+    ArrayList<Usuario> listaUsuario=new Main().lista();
     /**
      * Creates new form InterfazRecuperarPassword
      */
@@ -43,7 +47,7 @@ public class InterfazRecuperarPassword extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Recuperar Password"));
 
-        cbbPregunta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbPregunta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione Pregunta Secreta", "¿Cual es el nombre de mi perro?", "¿Cual es mi ciudad de nacimiento?", "¿Cual era mi apodo cuando niño?" }));
 
         lblPregunta.setText("Pregunta Secreta :");
 
@@ -118,8 +122,88 @@ public class InterfazRecuperarPassword extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void mostrarAdvertencia(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+    
+    public void SetTextoRut(String texto){
+        txtRut.setText(texto);
+    }
+    
+    public boolean coincidePreguntaRespuesta(String rut, String pregunta, String respuesta){
+        boolean coincide = false;
+        try {
+            for (Usuario iUsuario : listaUsuario) {
+                if(rut.equals(iUsuario.getRut()))
+                {
+                    if(pregunta.equals(iUsuario.getPregunta())&&respuesta.equals(iUsuario.getRespuesta()))
+                    {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
+        }
+        return coincide;
+    }
+    
+    public boolean cambiarContraseña(String rut, String password){
+        boolean coincide = false;
+        try {
+            for (Usuario iUsuario : listaUsuario) {
+                if(rut.equals(iUsuario.getRut()))
+                {
+                    iUsuario.setPassword(password);
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
+        }
+        mostrarAdvertencia("HAY ALGO MUY MALO en Cambiar Contraseña");
+        return coincide;
+    }
+    
     private void btnRecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecuperarActionPerformed
-        JOptionPane.showInputDialog("Ingrese nueva Contraseña Temporal :");
+        String rut="";
+        String pregunta="";
+        String respuesta="";
+        String temporalPass="";
+        boolean bandera=true;
+              
+        if(txtRut.getText().isEmpty()){ bandera=false;}
+        else {rut=txtRut.getText();}
+        if(txtRespuesta.getText().isEmpty()){ bandera=false;}
+        else {respuesta=txtRespuesta.getText();}
+        if (cbbPregunta.getSelectedIndex()==0) {
+            bandera=false;
+        } else {
+            pregunta=String.valueOf(cbbPregunta.getSelectedItem());
+        }
+        
+        if(bandera==false)
+        {
+            mostrarAdvertencia("Favor, llene todos los campos");
+        }else{
+            try{
+                if(Usuario.validarRut(txtRut.getText())==false)
+                {
+                    mostrarAdvertencia("Rut no es valido = ".concat(txtRut.getText()));
+                }else{    
+                    if(coincidePreguntaRespuesta(rut, pregunta, respuesta))
+                    {  
+                        temporalPass=JOptionPane.showInputDialog("Ingrese nueva Contraseña Temporal :");
+                        cambiarContraseña(rut,temporalPass);
+                    }else
+                    {
+                        mostrarAdvertencia("NO COINCIDEN!!!");
+                    }
+                }
+            }catch(Exception e){
+                System.out.println("Error Inesperado de Recuperar Password".concat(e.getMessage()));
+            }
+        }
     }//GEN-LAST:event_btnRecuperarActionPerformed
 
     /**

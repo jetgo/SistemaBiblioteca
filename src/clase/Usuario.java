@@ -16,10 +16,24 @@ public class Usuario {
     private String correo;
     private String password;
     private String carrera;
+    private String pregunta;
+    private String respuesta;
 
     public Usuario() {
     }
 
+    public Usuario(String rut, String nombre, String apellido, String correo, String password, String carrera, String pregunta, String respuesta) {
+        this.rut = rut;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.password = password;
+        this.carrera = carrera;
+        this.pregunta = pregunta;
+        this.respuesta = respuesta;
+    }
+
+    
     public Usuario(String rut, String nombre, String apellido, String correo, String password) {
         this.rut = rut;
         this.nombre = nombre;
@@ -119,6 +133,60 @@ public class Usuario {
      */
     public void setCarrera(String carrera) {
         this.carrera = carrera;
+    }
+    
+    public static boolean validarRut(String rut) {
+        boolean validacion = false;
+        try {
+            rut =  rut.toUpperCase();
+            rut = rut.replace(".", "");
+            rut = rut.replace("-", "");
+            int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));
+
+            char dv = rut.charAt(rut.length() - 1);
+
+            int m = 0, s = 1;
+            for (; rutAux != 0; rutAux /= 10) {
+                s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
+            }
+            if (dv == (char) (s != 0 ? s + 47 : 75)) {
+                validacion = true;
+            }
+
+        } catch (java.lang.NumberFormatException e) {
+            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
+        } catch (Exception e) {
+            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
+        }
+        return validacion;
+    }
+
+    /**
+     * @return the pregunta
+     */
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    /**
+     * @param pregunta the pregunta to set
+     */
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
+    }
+
+    /**
+     * @return the respuesta
+     */
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    /**
+     * @param respuesta the respuesta to set
+     */
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
     }
     
     

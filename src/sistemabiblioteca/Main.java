@@ -6,6 +6,7 @@
 package sistemabiblioteca;
 
 import clase.Usuario;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 
@@ -15,11 +16,23 @@ import javax.swing.JFrame;
  */
 public class Main {
 
+     //Creando ArrayList
+    
+    public ArrayList<Usuario> lista(){
+        ArrayList<Usuario> listaUsuario =new ArrayList<>();
+        Usuario A=new Usuario("159794466", "david", "villegas", "david@gmailcom", "1234");
+        Usuario B=new Usuario("111111111", "juan", "perez", "david@gmailcom", "1234", "Ingenieria Informatica", "¿Cual es el nombre de mi perro?", "bobi");
+        listaUsuario.add(A);
+        listaUsuario.add(B);
+        return listaUsuario;
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         InterfazLogin ventana=new InterfazLogin();
+        
         ventana.setLocationRelativeTo(null);
         ventana.setSize(520, 110);
         ventana.setVisible(true);
