@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistemabiblioteca;
+package vista;
 
 import java.util.Date;
 
@@ -156,6 +156,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void CerrarTodo(){
+        this.dispose();
+    }
     private void btnMantenedorUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenedorUsuarioActionPerformed
         InterfazMantenedorUsuario mantenedorUsuario=new InterfazMantenedorUsuario();
         dtpContenedor.add(mantenedorUsuario);
@@ -164,10 +167,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMantenedorUsuarioActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        InterfazLogin login=new InterfazLogin();
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);
-        this.dispose();
+//        Login login=new Login();
+//        login.setLocationRelativeTo(null);
+//        login.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnMantenedorRecursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenedorRecursoActionPerformed
@@ -197,6 +200,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void btnActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarUsuarioActionPerformed
         InterfazActualizarUsuario actualizarUsuario=new InterfazActualizarUsuario();
         dtpContenedor.add(actualizarUsuario);
+        actualizarUsuario.limpiarTodo();
         actualizarUsuario.show();
     }//GEN-LAST:event_btnActualizarUsuarioActionPerformed
 

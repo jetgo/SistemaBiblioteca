@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistemabiblioteca;
+package vista;
 
+import controlador.Main;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import clase.Usuario;
+//import clase.Usuario;
 import javax.swing.JOptionPane;
 /**
  *
  * @author David
  */
-public class InterfazLogin extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
-    ArrayList<Usuario> listaUsuario=new Main().lista();
     
     /**
      * Creates new form Login
      */
-    public InterfazLogin() {
+    public Login() {
         initComponents();
     }
 
@@ -56,9 +56,11 @@ public class InterfazLogin extends javax.swing.JFrame {
         lblRut = new javax.swing.JLabel();
         txtRepetirPassword = new javax.swing.JPasswordField();
         txtPassword = new javax.swing.JPasswordField();
-        txtCarrera = new javax.swing.JLabel();
-        cbbCarrera = new javax.swing.JComboBox();
         btnLimpiar = new javax.swing.JButton();
+        lblPregunta = new javax.swing.JLabel();
+        lblRespuesta = new javax.swing.JLabel();
+        cbbPregunta = new javax.swing.JComboBox();
+        txtRespuesta = new javax.swing.JTextField();
         btnFormularioRegistro = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,16 +106,18 @@ public class InterfazLogin extends javax.swing.JFrame {
 
         lblRut.setText("Rut :");
 
-        txtCarrera.setText("Carrera :");
-
-        cbbCarrera.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione Carrera", "Ingenieria en Informatica" }));
-
         btnLimpiar.setText("Limpiar Todo");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
+
+        lblPregunta.setText("Pregunta Secreta :");
+
+        lblRespuesta.setText("Respuesta Secreta :");
+
+        cbbPregunta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout pnlRegistroAlumnoLayout = new javax.swing.GroupLayout(pnlRegistroAlumno);
         pnlRegistroAlumno.setLayout(pnlRegistroAlumnoLayout);
@@ -138,28 +142,30 @@ public class InterfazLogin extends javax.swing.JFrame {
                     .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
                         .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
-                                .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPasword)
-                                    .addComponent(lblCorreo))
+                                .addComponent(lblCorreo)
                                 .addGap(24, 24, 24)
-                                .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
-                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 82, Short.MAX_VALUE))
-                                    .addComponent(txtCorreo)))
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
+                                .addComponent(lblPasword)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblRepetirPassword)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtRepetirPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
                                 .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblRepetirPassword)
-                                    .addComponent(txtCarrera))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cbbCarrera, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtRepetirPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(lblPregunta)
+                                    .addComponent(lblRespuesta))
+                                .addGap(20, 20, 20)
+                                .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbbPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnlRegistroAlumnoLayout.setVerticalGroup(
             pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,19 +187,22 @@ public class InterfazLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPasword)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRepetirPassword)
                     .addComponent(txtRepetirPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCarrera)
-                    .addComponent(cbbCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                    .addComponent(lblPregunta)
+                    .addComponent(cbbPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRespuesta)
+                    .addComponent(txtRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
-                    .addComponent(btnLimpiar)))
+                    .addComponent(btnLimpiar))
+                .addGap(9, 9, 9))
         );
 
         btnFormularioRegistro.setText("Registrar Alumno");
@@ -208,28 +217,25 @@ public class InterfazLogin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlRegistroAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtRutUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnFormularioRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtPasswordUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnInicioSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnRecuperarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                        .addComponent(txtRutUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnFormularioRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtPasswordUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnInicioSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 10, Short.MAX_VALUE)
+                        .addComponent(btnRecuperarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addComponent(pnlRegistroAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,8 +252,7 @@ public class InterfazLogin extends javax.swing.JFrame {
                     .addComponent(btnRecuperarPassword)
                     .addComponent(btnFormularioRegistro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlRegistroAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnlRegistroAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -260,7 +265,6 @@ public class InterfazLogin extends javax.swing.JFrame {
         txtNombre.setText("");
         txtApellido.setText("");
         txtCorreo.setText("");
-        cbbCarrera.setSelectedIndex(0);
         txtPassword.setText("");
         txtRepetirPassword.setText("");
     }
@@ -272,174 +276,148 @@ public class InterfazLogin extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, mensaje);
     }
     
-    public boolean existeRut(String rut){
-        boolean existeRut = false;
-        try {
-            for (Usuario iUsuario : listaUsuario) {
-                if(rut.equals(iUsuario.getRut()))
-                {
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
-        }
-        return existeRut;
-    }
+//    public boolean existeRut(String rut){
+//        boolean existeRut = false;
+//        try {
+//            for (Usuario iUsuario : listaUsuario) {
+//                if(rut.equals(iUsuario.getRut()))
+//                {
+//                    return true;
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
+//        }
+//        return existeRut;
+//    }
     
-    public boolean coincidePassword(String rut, String password){
-        boolean coincide = false;
-        try {
-            for (Usuario iUsuario : listaUsuario) {
-                if(rut.equals(iUsuario.getRut()))
-                {
-                    if(password.equals(iUsuario.getPassword()))
-                    {
-                        return true;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
-        }
-        return coincide;
-    }
+//    public boolean coincidePassword(String rut, String password){
+//        boolean coincide = false;
+//        try {
+//            for (Usuario iUsuario : listaUsuario) {
+//                if(rut.equals(iUsuario.getRut()))
+//                {
+//                    if(password.equals(iUsuario.getPassword()))
+//                    {
+//                        return true;
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
+//        }
+//        return coincide;
+//    }
     
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
         
-        String rut="";
-        String password="";
-        if(txtRutUsuario.getText().equals("")||String.valueOf(txtPasswordUsuario.getPassword()).equals("")){
-            mostrarAdvertencia("Ingrese su RUT y PASSWORD");
-        }   
-        else{
-            if(Usuario.validarRut(txtRutUsuario.getText())==false)
-            {
-                mostrarAdvertencia("Rut no es valido = ".concat(txtRutUsuario.getText()));
-            }else{
-                try {
-                    rut = txtRutUsuario.getText();
-                    rut = rut.toUpperCase();
-                    rut = rut.replace(".", "");
-                    rut = rut.replace("-", "");
-                    password= String.valueOf(txtPasswordUsuario.getPassword());
-
-                    if(coincidePassword(rut,password)){
-                        InterfazPrincipal ventanaPrincipal= new InterfazPrincipal();
-                        ventanaPrincipal.setLocationRelativeTo(null);
-                        ventanaPrincipal.setVisible(true);
-                        this.dispose();
-                    }else{
-                        mostrarAdvertencia("Su Usuario o Contraseña son Incorrectos");
-                    }
-
-                } catch (Exception e) {
-                    mostrarAdvertencia("Upss, Ocurrio un error inesperado!!! = " + e.getMessage());
-                }
-            }
-        }
         
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
     private void btnFormularioRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormularioRegistroActionPerformed
-        if(btnFormularioRegistro.isSelected())
-        {
-            this.setSize(520, 370);
-            pnlRegistroAlumno.setVisible(true);
-        }else
-        {
-            this.setSize(520, 110);
-            pnlRegistroAlumno.setVisible(false);
-        }
+//        if(btnFormularioRegistro.isSelected())
+//        {
+//            this.setSize(520, 370);
+//            pnlRegistroAlumno.setVisible(true);
+//        }else
+//        {
+//            this.setSize(520, 110);
+//            pnlRegistroAlumno.setVisible(false);
+//        }
+//        for (Usuario listaUsuario1 : listaUsuario) {
+//            System.out.print(listaUsuario1.getRut());
+//            System.out.print(listaUsuario1.getNombre());
+//            System.out.print(listaUsuario1.getApellido());
+//            System.out.print(listaUsuario1.getCorreo());
+//            System.out.println(listaUsuario1.getPassword());
+//        }
     }//GEN-LAST:event_btnFormularioRegistroActionPerformed
 
     private void btnRecuperarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecuperarPasswordActionPerformed
-        InterfazRecuperarPassword recuperar=new InterfazRecuperarPassword(this,true);
-        recuperar.SetTextoRut(txtRutUsuario.getText());
-        recuperar.setLocationRelativeTo(this);
-        recuperar.setVisible(true);
+//        InterfazRecuperarPassword recuperar=new InterfazRecuperarPassword(this,true);
+//        recuperar.SetTextoRut(txtRutUsuario.getText());
+//        recuperar.setLocationRelativeTo(this);
+//        recuperar.setVisible(true);
     }//GEN-LAST:event_btnRecuperarPasswordActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         
-        boolean banderaRegistro=true;
-        String rut="";
-        String nombre="";
-        String apellido="";
-        String correo="";
-        String password="";
-        String repetirPass="";
-        String carrera="";
-        if(txtRut.getText().equals("")){ banderaRegistro=false;} 
-        else {
-            if(Usuario.validarRut(txtRut.getText())==false)
-            {
-                mostrarAdvertencia("Rut no es valido = ".concat(txtRut.getText()));
-                banderaRegistro=false;
-            }else{
-                rut=txtRut.getText();
-                rut =  rut.toUpperCase();
-                rut = rut.replace(".", "");
-                rut = rut.replace("-", "");
-            }
-        }
-        if(txtNombre.getText().equals("")){ banderaRegistro=false;} 
-        else {nombre=txtNombre.getText();}
-        if(txtApellido.getText().equals("")){ banderaRegistro=false;}
-        else {apellido=txtApellido.getText();}
-        if(txtCorreo.getText().equals("")){ banderaRegistro=false;} 
-        else {
-            if (txtCorreo.getText().matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
-                correo=txtCorreo.getText();
-            }else{
-                mostrarAdvertencia("Ingrese un correo Valido");
-                banderaRegistro=false;
-            }
-        }
-        if(String.valueOf(txtPassword.getPassword()).equals("")){ banderaRegistro=false;}
-        else {
-            
-            if(String.valueOf(txtPassword.getPassword()).length()<4)
-            {
-                mostrarAdvertencia("Contraseña debe ser mayor a 4 caracteres");
-                banderaRegistro=false;
-            }else{
-                password=String.valueOf(txtPassword.getPassword());
-            }
-        }
-        if(String.valueOf(txtRepetirPassword.getPassword()).equals("")){ banderaRegistro=false;} 
-        else {
-            if(String.valueOf(txtRepetirPassword.getPassword()).equals(String.valueOf(txtPassword.getPassword())))
-            {
-                repetirPass=String.valueOf(txtRepetirPassword.getPassword());
-            }else{
-                mostrarAdvertencia("Debe Repetir la misma Contraseña");
-                banderaRegistro=false;
-            }
-        }
-        if (cbbCarrera.getSelectedIndex()==0) {
-            banderaRegistro=false;
-        } else {
-            carrera=String.valueOf(cbbCarrera.getSelectedItem());
-        }
+//        boolean banderaRegistro=true;
+//        String rut="";
+//        String nombre="";
+//        String apellido="";
+//        String correo="";
+//        String password="";
+//        String repetirPass="";
+//        String carrera="";
+//        if(txtRut.getText().equals("")){ banderaRegistro=false;} 
+//        else {
+//            if(Usuario.validarRut(txtRut.getText())==false)
+//            {
+//                mostrarAdvertencia("Rut no es valido = ".concat(txtRut.getText()));
+//                banderaRegistro=false;
+//            }else{
+//                rut=txtRut.getText();
+//                rut =  rut.toUpperCase();
+//                rut = rut.replace(".", "");
+//                rut = rut.replace("-", "");
+//            }
+//        }
+//        if(txtNombre.getText().equals("")){ banderaRegistro=false;} 
+//        else {nombre=txtNombre.getText();}
+//        if(txtApellido.getText().equals("")){ banderaRegistro=false;}
+//        else {apellido=txtApellido.getText();}
+//        if(txtCorreo.getText().equals("")){ banderaRegistro=false;} 
+//        else {
+//            if (txtCorreo.getText().matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
+//                correo=txtCorreo.getText();
+//            }else{
+//                mostrarAdvertencia("Ingrese un correo Valido");
+//                banderaRegistro=false;
+//            }
+//        }
+//        if(String.valueOf(txtPassword.getPassword()).equals("")){ banderaRegistro=false;}
+//        else {
+//            
+//            if(String.valueOf(txtPassword.getPassword()).length()<4)
+//            {
+//                mostrarAdvertencia("Contraseña debe ser mayor a 4 caracteres");
+//                banderaRegistro=false;
+//            }else{
+//                password=String.valueOf(txtPassword.getPassword());
+//            }
+//        }
+//        if(String.valueOf(txtRepetirPassword.getPassword()).equals("")){ banderaRegistro=false;} 
+//        else {
+//            if(String.valueOf(txtRepetirPassword.getPassword()).equals(String.valueOf(txtPassword.getPassword())))
+//            {
+//                repetirPass=String.valueOf(txtRepetirPassword.getPassword());
+//            }else{
+//                mostrarAdvertencia("Debe Repetir la misma Contraseña");
+//                banderaRegistro=false;
+//            }
+//        }
+//        if (cbbCarrera.getSelectedIndex()==0) {
+//            banderaRegistro=false;
+//        } else {
+//            carrera=String.valueOf(cbbCarrera.getSelectedItem());
+//        }
+//        
+//        if(banderaRegistro==false)
+//        {
+//            mostrarAdvertencia("Favor, llene todos los campos");
+//        }else{
+//            if(existeRut(rut)==false){
+//                Usuario registroUsuario= new Usuario(rut, nombre, apellido, correo, password, carrera);
+//                listaUsuario.add(registroUsuario);
+//                mostrarAdvertencia("Registro Completado Satisfactoriamente");
+//                limpiarTodo();
+//            }else{
+//                mostrarAdvertencia("RUT ya existe en la Base de Datos");
+//            }
+//        }
+//        
         
-        if(banderaRegistro==false)
-        {
-            mostrarAdvertencia("Favor, llene todos los campos");
-        }else{
-            if(existeRut(rut)==false){
-                Usuario registroUsuario= new Usuario(rut, nombre, apellido, correo, password, carrera);
-                listaUsuario.add(registroUsuario);
-                mostrarAdvertencia("Registro Completado Satisfactoriamente");
-                limpiarTodo();
-            }else{
-                mostrarAdvertencia("RUT ya existe en la Base de Datos");
-            }
-        }
-        
-        for (Usuario listaUsuario1 : listaUsuario) {
-            System.out.println(listaUsuario1.getRut());
-        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
     
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -463,21 +441,23 @@ public class InterfazLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazLogin().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
@@ -488,23 +468,25 @@ public class InterfazLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRecuperarPassword;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JComboBox cbbCarrera;
+    private javax.swing.JComboBox cbbPregunta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPasword;
+    private javax.swing.JLabel lblPregunta;
     private javax.swing.JLabel lblRepetirPassword;
+    private javax.swing.JLabel lblRespuesta;
     private javax.swing.JLabel lblRut;
     private javax.swing.JPanel pnlRegistroAlumno;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JLabel txtCarrera;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JPasswordField txtPasswordUsuario;
     private javax.swing.JPasswordField txtRepetirPassword;
+    private javax.swing.JTextField txtRespuesta;
     private javax.swing.JTextField txtRut;
     private javax.swing.JTextField txtRutUsuario;
     // End of variables declaration//GEN-END:variables

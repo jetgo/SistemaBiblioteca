@@ -27,37 +27,32 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlRegistroAlumno" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel1" min="-2" pref="60" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="txtRutUsuario" min="-2" pref="90" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" pref="70" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="btnFormularioRegistro" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="txtPasswordUsuario" min="-2" pref="90" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnInicioSesion" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="btnRecuperarPassword" min="-2" pref="200" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="txtRutUsuario" min="-2" pref="90" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="70" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnFormularioRegistro" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="txtPasswordUsuario" min="-2" pref="90" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnInicioSesion" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                      <Component id="btnRecuperarPassword" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Component id="pnlRegistroAlumno" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -78,7 +73,6 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlRegistroAlumno" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -148,39 +142,39 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblPasword" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="lblCorreo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="txtPassword" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="82" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="txtCorreo" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="txtCorreo" min="-2" pref="232" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblPasword" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtPassword" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="lblRepetirPassword" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtRepetirPassword" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblRepetirPassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtCarrera" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblPregunta" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblRespuesta" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="cbbCarrera" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtRepetirPassword" alignment="0" pref="150" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txtRespuesta" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="cbbPregunta" min="-2" pref="200" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="btnRegistrar" min="-2" pref="200" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnLimpiar" min="-2" pref="200" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
+              </Group>
+              <Group type="102" attributes="0">
+                  <Component id="btnRegistrar" min="-2" pref="200" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnLimpiar" min="-2" pref="200" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -208,22 +202,25 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblPasword" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblRepetirPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtRepetirPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbbCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPregunta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbbPregunta" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblRespuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtRespuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -279,21 +276,6 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtPassword">
         </Component>
-        <Component class="javax.swing.JLabel" name="txtCarrera">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Carrera :"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cbbCarrera">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Seleccione Carrera"/>
-                <StringItem index="1" value="Ingenieria en Informatica"/>
-              </StringArray>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="btnLimpiar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpiar Todo"/>
@@ -301,6 +283,30 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPregunta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pregunta Secreta :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblRespuesta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Respuesta Secreta :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbbPregunta">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtRespuesta">
         </Component>
       </SubComponents>
     </Container>
