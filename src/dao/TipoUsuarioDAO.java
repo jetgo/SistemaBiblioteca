@@ -6,7 +6,7 @@
 package dao;
 
 import conexion.Conexion;
-import interfaces.Obligacion;
+import interfaces.ModeloDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ import modelo.TipoUsuario;
  *
  * @author David
  */
-public class TipoUsuarioDAO implements Obligacion<TipoUsuario>{
+public class TipoUsuarioDAO implements ModeloDAO<TipoUsuario>{
     
     private static final String SQL_INSERT=
             "INSERT INTO tipoUsuario "

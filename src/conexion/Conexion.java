@@ -23,59 +23,29 @@ public class Conexion {
             cnn=DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca?zeroDateTimeBehavior=convertToNull", "root", "mysql");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            //System.out.println("Conexion Arriba...");
         }
         
     }
     
     public synchronized static Conexion estado(){
         if (instance==null) {
+            //System.out.println("Conexion RE-Establecida");
             instance=new Conexion();
         }
+        //System.out.println("Conexion Estable...");
         return instance;
     }
     
     public Connection getCnn(){
+        //System.out.println("Recojiendo la Conexion");
         return cnn;
     }
     
     public void cerrarConexion(){
         instance=null;
+       //System.out.println("Desconexion de la Base de Datos");
     }
-    
-//    Statement state;
-//    ResultSet res;
-//    
-//    public Conexion() {
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        try {
-//            cnn=DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca?zeroDateTimeBehavior=convertToNull", "root", "mysql");
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    
-    
-    
-    
-//    public Connection conexion(){
-//        try {
-//            //cargar driver MySql
-//            Class.forName("com.mysql.jdbc.Driver");
-//            con=DriverManager.getConnection("jdbc:mysql://localhost/biblioteca","root","mysql");
-//            System.out.println("Conexion Establecida");
-//            JOptionPane.showMessageDialog(null, "Conexion Establecida");
-//        } catch (ClassNotFoundException | SQLException e) {
-//            System.out.println("Error de Conexion");
-//            JOptionPane.showMessageDialog(null, "Error de Conexion"+e);
-//        }
-//        return con;
-//    }
 
-    
-
-    
 }

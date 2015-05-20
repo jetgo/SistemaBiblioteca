@@ -6,7 +6,7 @@
 package dao;
 
 import conexion.Conexion;
-import interfaces.Obligacion;
+import interfaces.ModeloDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ import modelo.Persona;
  *
  * @author David
  */
-public class PersonaDAO implements Obligacion<Persona>{
+public class PersonaDAO implements ModeloDAO<Persona>{
     private static final String SQL_INSERT=
             "INSERT INTO persona "
             + "(perRut, perNombre, perApellidoPaterno, perApellidoMaterno, perFechaNacimiento, perSexo, perDireccion, perTelefono, perCorreo) "
@@ -124,7 +124,7 @@ public class PersonaDAO implements Obligacion<Persona>{
             pst.setString(1, llave.toString());
             res = pst.executeQuery();
             while(res.next()){
-                per=new Persona(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7),res.getString(8), res.getString(9));
+                per=new Persona(res.getString("perRut"), res.getString("perNombre"), res.getString("perApellidoPaterno"), res.getString("perApellidoMaterno"), res.getString("perFechaNacimiento"), res.getString("perSexo"), res.getString("perDireccion"),res.getString("perTelefono"), res.getString("perCorreo"));
             }
             return per;
         } catch (SQLException ex) {
@@ -146,7 +146,7 @@ public class PersonaDAO implements Obligacion<Persona>{
             pst = cnn.getCnn().prepareStatement(SQL_READALL);
             res = pst.executeQuery();
             while(res.next()){
-                personas.add(new Persona(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7),res.getString(8), res.getString(9)));
+                personas.add(new Persona(res.getString("perRut"), res.getString("perNombre"), res.getString("perApellidoPaterno"), res.getString("perApellidoMaterno"), res.getString("perFechaNacimiento"), res.getString("perSexo"), res.getString("perDireccion"),res.getString("perTelefono"), res.getString("perCorreo")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);

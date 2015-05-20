@@ -7,7 +7,7 @@ package dao;
 
 import conexion.Conexion;
 import modelo.Empresa;
-import interfaces.Obligacion;
+import interfaces.ModeloDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author David
  */
-public class EmpresaDAO implements Obligacion<Empresa>{
+public class EmpresaDAO implements ModeloDAO<Empresa>{
     
     private static final String SQL_INSERT=
             "INSERT INTO empresa "

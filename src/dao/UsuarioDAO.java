@@ -6,7 +6,7 @@
 package dao;
 
 import conexion.Conexion;
-import interfaces.Obligacion;
+import interfaces.ModeloDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,25 +20,33 @@ import modelo.Usuario;
  *
  * @author David
  */
-public class UsuarioDAO implements Obligacion<Usuario>{
+public class UsuarioDAO implements ModeloDAO<Usuario>{
 
     private static final String SQL_INSERT=
             "INSERT INTO usuario "
-            + "(usuId, tipUsuId, estUsuId, perRut, preSecId, usuAlias, usuClave, usuRespuesta, usuFechaRegistro, usuHoraRegistro) "
+            + "(usuId, perRut, tipUsuId, estUsuId, preSecId, usuAlias, usuClave, usuRespuesta, usuHoraRegistro, usuFechaRegistro) "
             + "VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE=
             "UPDATE usuario "
-            + "SET tipUsuId=?, estUsuId=?, perRut=?, usuPregunta=?, usuAlias=?, usuClave=?, usuRespuesta=?, usuFechaRegistro=?, usuHoraRegistro=?  "
+            + "SET perRut=?, tipUsuId=?, estUsuId=?, preSecId=?, usuAlias=?, usuClave=?, usuRespuesta=?, usuHoraRegistro=?, usuFechaRegistro=?  "
             + "WHERE usuId=?";
     private static final String SQL_DELETE=
             "DELETE FROM usuario "
             + "WHERE usuId=?";
-    
     private static final String SQL_READ=
             "SELECT * FROM usuario "
             + "WHERE usuId=?";
     private static final String SQL_READALL=
             "SELECT * FROM usuario";
+    
+    private static final String SQL_FINDBYRUT=
+            "SELECT * FROM usuario "
+            + "WHERE perRut=?";
+    
+    private static final String SQL_NEXTID=
+            "SELECT MAX(usuId)+1 AS Id "
+            + "FROM usuario";
+    
     
     private static final Conexion cnn=Conexion.estado();
     
@@ -50,15 +58,15 @@ public class UsuarioDAO implements Obligacion<Usuario>{
         try {       
             pst=cnn.getCnn().prepareStatement(SQL_INSERT);
             pst.setString(1, c.getUsuId());
-            pst.setString(2, c.getTipUsuId());
-            pst.setString(3, c.getEstUsuId());
-            pst.setString(4, c.getPerRut());
+            pst.setString(2, c.getPerRut());
+            pst.setString(3, c.getTipUsuId());
+            pst.setString(4, c.getEstUsuId());
             pst.setString(5, c.getPreSecId());
             pst.setString(6, c.getUsuAlias());
             pst.setString(7, c.getUsuClave());
             pst.setString(8, c.getUsuRespuesta());
-            pst.setString(9, c.getUsuFechaRegistro());
-            pst.setString(10, c.getUsuHoraRegistro());
+            pst.setString(9, c.getUsuHoraRegistro());
+            pst.setString(10, c.getUsuFechaRegistro());
             if(pst.executeUpdate()>0)
             {
                 return true;
@@ -153,7 +161,7 @@ public class UsuarioDAO implements Obligacion<Usuario>{
             pst=cnn.getCnn().prepareStatement(SQL_READALL);
             res=pst.executeQuery();
             while(res.next()){
-                usuarios.add(new Usuario(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8), res.getString(9), res.getString(10)));
+                usuarios.add(new Usuario(res.getString("usuId"), res.getString("perRut"), res.getString("tipUsuId"), res.getString("estUsuId"), res.getString("preSecId"), res.getString("usuAlias"), res.getString("usuClave"), res.getString("usuRespuesta"), res.getString("usuHoraRegistro"), res.getString("usuFechaRegistro")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -161,6 +169,51 @@ public class UsuarioDAO implements Obligacion<Usuario>{
             cnn.cerrarConexion();
         }
         return usuarios;
+    }
+    
+    public Usuario findByRut(Object llave) {
+        
+        PreparedStatement pst;
+        ResultSet res;
+        Usuario usu = null;
+        
+        try {
+            pst= cnn.getCnn().prepareStatement(SQL_FINDBYRUT);
+            pst.setString(1, llave.toString());
+            res=pst.executeQuery();
+            while(res.next()){
+                usu = new Usuario(res.getString("usuId"), res.getString("perRut"), res.getString("tipUsuId"), res.getString("estUsuId"), res.getString("preSecId"), res.getString("usuAlias"), res.getString("usuClave"), res.getString("usuRespuesta"), res.getString("usuHoraRegistro"), res.getString("usuFechaRegistro"));
+            }
+            return usu;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cnn.cerrarConexion();
+        }
+        return usu;        
+    }
+    
+    
+    public String nextID(){
+        PreparedStatement pst;
+        ResultSet res;
+        String proximoId=null;
+        
+        try {
+            pst=cnn.getCnn().prepareStatement(SQL_NEXTID);
+            res=pst.executeQuery();
+            while (res.next()) { 
+                proximoId=res.getString("Id");
+            }
+            if(proximoId==null){
+                return "1000";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cnn.cerrarConexion();
+        }
+        return proximoId;
     }
     
 }

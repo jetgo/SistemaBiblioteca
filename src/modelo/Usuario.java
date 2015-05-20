@@ -11,30 +11,30 @@ package modelo;
  */
 public class Usuario {
     private String usuId;
+    private String perRut;
     private String tipUsuId;
     private String estUsuId;
-    private String perRut;
     private String preSecId;
     private String usuAlias;
     private String usuClave;
     private String usuRespuesta;
-    private String usuFechaRegistro;
     private String usuHoraRegistro;
+    private String usuFechaRegistro;
 
     public Usuario() {
     }
 
-    public Usuario(String usuId, String tipUsuId, String estUsuId, String perRut, String preSecId, String usuAlias, String usuClave, String usuRespuesta, String usuFechaRegistro, String usuHoraRegistro) {
+    public Usuario(String usuId, String perRut, String tipUsuId, String estUsuId, String preSecId, String usuAlias, String usuClave, String usuRespuesta, String usuHoraRegistro, String usuFechaRegistro) {
         this.usuId = usuId;
+        this.perRut = perRut;
         this.tipUsuId = tipUsuId;
         this.estUsuId = estUsuId;
-        this.perRut = perRut;
         this.preSecId = preSecId;
         this.usuAlias = usuAlias;
         this.usuClave = usuClave;
         this.usuRespuesta = usuRespuesta;
-        this.usuFechaRegistro = usuFechaRegistro;
         this.usuHoraRegistro = usuHoraRegistro;
+        this.usuFechaRegistro = usuFechaRegistro;
     }
 
 

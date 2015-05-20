@@ -6,7 +6,7 @@
 package dao;
 
 import conexion.Conexion;
-import interfaces.Obligacion;
+import interfaces.ModeloDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ import modelo.PreguntaSecreta;
  *
  * @author David
  */
-public class PreguntaSecretaDAO implements Obligacion<PreguntaSecreta>{
+public class PreguntaSecretaDAO implements ModeloDAO<PreguntaSecreta>{
     
     private static final String SQL_INSERT=
             "INSERT INTO preguntaSecreta "

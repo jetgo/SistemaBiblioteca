@@ -6,6 +6,9 @@
 package vista;
 
 import controlador.Main;
+import controlador.Iniciar;
+import interfaces.RegistroAlumno;
+import interfaces.Validacion;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -17,12 +20,14 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
+    private Iniciar controlLogin;
     
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Login( Iniciar controlInicio) {
         initComponents();
+        this.controlLogin = controlInicio;
     }
 
     
@@ -36,12 +41,6 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtRutUsuario = new javax.swing.JTextField();
-        txtPasswordUsuario = new javax.swing.JPasswordField();
-        btnInicioSesion = new javax.swing.JButton();
-        btnRecuperarPassword = new javax.swing.JButton();
         pnlRegistroAlumno = new javax.swing.JPanel();
         lblNombre = new javax.swing.JLabel();
         lblApellido = new javax.swing.JLabel();
@@ -61,29 +60,18 @@ public class Login extends javax.swing.JFrame {
         lblRespuesta = new javax.swing.JLabel();
         cbbPregunta = new javax.swing.JComboBox();
         txtRespuesta = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        btnInicioSesion = new javax.swing.JButton();
+        btnRecuperarPassword = new javax.swing.JButton();
         btnFormularioRegistro = new javax.swing.JToggleButton();
+        txtPasswordUsuario = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        txtRutUsuario = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
-
-        jLabel1.setText("Rut :");
-
-        jLabel2.setText("Password :");
-
-        btnInicioSesion.setText("Iniciar Sesion");
-        btnInicioSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInicioSesionActionPerformed(evt);
-            }
-        });
-
-        btnRecuperarPassword.setText("¿Haz olvidado tu password?");
-        btnRecuperarPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRecuperarPasswordActionPerformed(evt);
-            }
-        });
 
         pnlRegistroAlumno.setBorder(javax.swing.BorderFactory.createTitledBorder("Registrate"));
 
@@ -161,7 +149,7 @@ public class Login extends javax.swing.JFrame {
                                 .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cbbPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 24, Short.MAX_VALUE))))
             .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -205,6 +193,22 @@ public class Login extends javax.swing.JFrame {
                 .addGap(9, 9, 9))
         );
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Inicio de Sesion"));
+
+        btnInicioSesion.setText("Entrar");
+        btnInicioSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInicioSesionActionPerformed(evt);
+            }
+        });
+
+        btnRecuperarPassword.setText("¿Haz olvidado tu password?");
+        btnRecuperarPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecuperarPasswordActionPerformed(evt);
+            }
+        });
+
         btnFormularioRegistro.setText("Registrar Alumno");
         btnFormularioRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,47 +216,64 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Password :");
+
+        jLabel1.setText("Rut :");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtRutUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2))
+                    .addComponent(btnFormularioRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(btnRecuperarPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPasswordUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnInicioSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtRutUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPasswordUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInicioSesion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRecuperarPassword)
+                    .addComponent(btnFormularioRegistro))
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRutUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnFormularioRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtPasswordUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnInicioSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 10, Short.MAX_VALUE)
-                        .addComponent(btnRecuperarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addComponent(pnlRegistroAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(txtRutUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPasswordUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnInicioSesion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRecuperarPassword)
-                    .addComponent(btnFormularioRegistro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlRegistroAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlRegistroAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -267,200 +288,95 @@ public class Login extends javax.swing.JFrame {
         txtCorreo.setText("");
         txtPassword.setText("");
         txtRepetirPassword.setText("");
+        cbbPregunta.setSelectedIndex(0);
+        txtRespuesta.setText("");
     }
     
     public void setVisiblePanelAlumno(boolean valor){
         pnlRegistroAlumno.setVisible(valor);
     }
-    public void mostrarAdvertencia(String mensaje){
-        JOptionPane.showMessageDialog(this, mensaje);
-    }
-    
-//    public boolean existeRut(String rut){
-//        boolean existeRut = false;
-//        try {
-//            for (Usuario iUsuario : listaUsuario) {
-//                if(rut.equals(iUsuario.getRut()))
-//                {
-//                    return true;
-//                }
-//            }
-//        } catch (Exception e) {
-//            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
-//        }
-//        return existeRut;
-//    }
-    
-//    public boolean coincidePassword(String rut, String password){
-//        boolean coincide = false;
-//        try {
-//            for (Usuario iUsuario : listaUsuario) {
-//                if(rut.equals(iUsuario.getRut()))
-//                {
-//                    if(password.equals(iUsuario.getPassword()))
-//                    {
-//                        return true;
-//                    }
-//                }
-//            }
-//        } catch (Exception e) {
-//            System.out.println("ERROR INESPERADO EN LA CLASE USUARIO = ".concat(e.getMessage()));
-//        }
-//        return coincide;
-//    }
-    
+
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
-        
-        
+        if(controlLogin.recibeRut(txtRutUsuario.getText())){
+            if (controlLogin.recibePassword(String.valueOf(txtPasswordUsuario.getPassword()))) {
+                controlLogin.iniciarSesion();
+            }
+        }   
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
     private void btnFormularioRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormularioRegistroActionPerformed
-//        if(btnFormularioRegistro.isSelected())
-//        {
-//            this.setSize(520, 370);
-//            pnlRegistroAlumno.setVisible(true);
-//        }else
-//        {
-//            this.setSize(520, 110);
-//            pnlRegistroAlumno.setVisible(false);
-//        }
-//        for (Usuario listaUsuario1 : listaUsuario) {
-//            System.out.print(listaUsuario1.getRut());
-//            System.out.print(listaUsuario1.getNombre());
-//            System.out.print(listaUsuario1.getApellido());
-//            System.out.print(listaUsuario1.getCorreo());
-//            System.out.println(listaUsuario1.getPassword());
-//        }
+        if(btnFormularioRegistro.isSelected()==true){
+            btnFormularioRegistro.setText("Cancelar Registro");
+            this.setVisiblePanelAlumno(true);
+            this.setSize(480, 420);
+            limpiarTodo();
+        } else {
+            btnFormularioRegistro.setText("Registrar Alumno");
+            this.setVisiblePanelAlumno(false);
+            this.setSize(480, 140);
+            limpiarTodo();
+        }
     }//GEN-LAST:event_btnFormularioRegistroActionPerformed
 
     private void btnRecuperarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecuperarPasswordActionPerformed
-//        InterfazRecuperarPassword recuperar=new InterfazRecuperarPassword(this,true);
-//        recuperar.SetTextoRut(txtRutUsuario.getText());
-//        recuperar.setLocationRelativeTo(this);
-//        recuperar.setVisible(true);
+        controlLogin.iniciarRecuperar();
     }//GEN-LAST:event_btnRecuperarPasswordActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
-//        boolean banderaRegistro=true;
-//        String rut="";
-//        String nombre="";
-//        String apellido="";
-//        String correo="";
-//        String password="";
-//        String repetirPass="";
-//        String carrera="";
-//        if(txtRut.getText().equals("")){ banderaRegistro=false;} 
-//        else {
-//            if(Usuario.validarRut(txtRut.getText())==false)
-//            {
-//                mostrarAdvertencia("Rut no es valido = ".concat(txtRut.getText()));
-//                banderaRegistro=false;
-//            }else{
-//                rut=txtRut.getText();
-//                rut =  rut.toUpperCase();
-//                rut = rut.replace(".", "");
-//                rut = rut.replace("-", "");
-//            }
-//        }
-//        if(txtNombre.getText().equals("")){ banderaRegistro=false;} 
-//        else {nombre=txtNombre.getText();}
-//        if(txtApellido.getText().equals("")){ banderaRegistro=false;}
-//        else {apellido=txtApellido.getText();}
-//        if(txtCorreo.getText().equals("")){ banderaRegistro=false;} 
-//        else {
-//            if (txtCorreo.getText().matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
-//                correo=txtCorreo.getText();
-//            }else{
-//                mostrarAdvertencia("Ingrese un correo Valido");
-//                banderaRegistro=false;
-//            }
-//        }
-//        if(String.valueOf(txtPassword.getPassword()).equals("")){ banderaRegistro=false;}
-//        else {
-//            
-//            if(String.valueOf(txtPassword.getPassword()).length()<4)
-//            {
-//                mostrarAdvertencia("Contraseña debe ser mayor a 4 caracteres");
-//                banderaRegistro=false;
-//            }else{
-//                password=String.valueOf(txtPassword.getPassword());
-//            }
-//        }
-//        if(String.valueOf(txtRepetirPassword.getPassword()).equals("")){ banderaRegistro=false;} 
-//        else {
-//            if(String.valueOf(txtRepetirPassword.getPassword()).equals(String.valueOf(txtPassword.getPassword())))
-//            {
-//                repetirPass=String.valueOf(txtRepetirPassword.getPassword());
-//            }else{
-//                mostrarAdvertencia("Debe Repetir la misma Contraseña");
-//                banderaRegistro=false;
-//            }
-//        }
-//        if (cbbCarrera.getSelectedIndex()==0) {
-//            banderaRegistro=false;
-//        } else {
-//            carrera=String.valueOf(cbbCarrera.getSelectedItem());
-//        }
-//        
-//        if(banderaRegistro==false)
-//        {
-//            mostrarAdvertencia("Favor, llene todos los campos");
-//        }else{
-//            if(existeRut(rut)==false){
-//                Usuario registroUsuario= new Usuario(rut, nombre, apellido, correo, password, carrera);
-//                listaUsuario.add(registroUsuario);
-//                mostrarAdvertencia("Registro Completado Satisfactoriamente");
-//                limpiarTodo();
-//            }else{
-//                mostrarAdvertencia("RUT ya existe en la Base de Datos");
-//            }
-//        }
-//        
-        
+        if(controlLogin.recibeRut(txtRut.getText())){
+            if(controlLogin.recibeNombreCompleto(txtNombre.getText(), txtApellido.getText())){
+                if(controlLogin.recibeCorreo(txtCorreo.getText())){
+                    if(controlLogin.recibePassword(String.valueOf(txtPassword.getPassword()), String.valueOf(txtRepetirPassword.getPassword()))){
+                        if(controlLogin.recibeRespuesta("11", txtRespuesta.getText())){
+                            controlLogin.registrarAlumno();
+                        }
+                    }
+                }
+            }
+        }       
     }//GEN-LAST:event_btnRegistrarActionPerformed
     
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        limpiarTodo();
+        limpiarTodo();    
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Login().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnFormularioRegistro;
@@ -471,6 +387,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JComboBox cbbPregunta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblNombre;

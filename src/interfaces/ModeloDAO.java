@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author David
  */
-public interface Obligacion <Algo>{
+public interface ModeloDAO <Algo>{
     public boolean create(Algo c);
     public boolean update(Algo c);
     public boolean delete(Object llave);

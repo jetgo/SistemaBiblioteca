@@ -6,7 +6,7 @@
 package dao;
 
 import conexion.Conexion;
-import interfaces.Obligacion;
+import interfaces.ModeloDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ import modelo.HistorialUsuario;
  *
  * @author David
  */
-public class HistorialUsuarioDAO implements Obligacion<HistorialUsuario>{
+public class HistorialUsuarioDAO implements ModeloDAO<HistorialUsuario>{
 
     private static final String SQL_INSERT=
             "INSERT INTO historialUsuario "
@@ -32,12 +32,16 @@ public class HistorialUsuarioDAO implements Obligacion<HistorialUsuario>{
     private static final String SQL_DELETE=
             "DELETE FROM historialUsuario "
             + "WHERE hisUsuId=?";
-    
     private static final String SQL_READ=
             "SELECT * FROM historialUsuario "
             + "WHERE hisUsuId=?";
     private static final String SQL_READALL=
             "SELECT * FROM historialUsuario";
+    
+    private static final String SQL_NEXTID=
+            "SELECT MAX(hisUsuId)+1 AS Id "
+            + "FROM historialUsuario";
+    
     
     private static final Conexion cnn=Conexion.estado();
     
@@ -116,7 +120,7 @@ public class HistorialUsuarioDAO implements Obligacion<HistorialUsuario>{
             pst.setString(1, llave.toString());
             res = pst.executeQuery();
             while(res.next()){
-                hisUsu=new HistorialUsuario(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5));
+                hisUsu=new HistorialUsuario(res.getString("hisUsuId"), res.getString("usuId"), res.getString("hisUsuDescripcion"), res.getString("hisUsuHoraRegistro"), res.getString("hisUsuFechaRegistro"));
             }
             return hisUsu;   
         } catch (SQLException ex) {
@@ -137,7 +141,7 @@ public class HistorialUsuarioDAO implements Obligacion<HistorialUsuario>{
             pst=cnn.getCnn().prepareStatement(SQL_READALL);
             res=pst.executeQuery();
             while(res.next()){
-                hisUsuarios.add(new HistorialUsuario(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5)));
+                hisUsuarios.add(new HistorialUsuario(res.getString("hisUsuId"), res.getString("usuId"), res.getString("hisUsuDescripcion"), res.getString("hisUsuHoraRegistro"), res.getString("hisUsuFechaRegistro")));
             }    
         } catch (SQLException ex) {
             Logger.getLogger(HistorialUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,4 +151,25 @@ public class HistorialUsuarioDAO implements Obligacion<HistorialUsuario>{
         return hisUsuarios;
     }
     
+    public String nextID(){
+        PreparedStatement pst;
+        ResultSet res;
+        String proximoId=null;
+        
+        try {
+            pst=cnn.getCnn().prepareStatement(SQL_NEXTID);
+            res=pst.executeQuery();
+            while (res.next()) { 
+                proximoId=res.getString("Id");
+            }
+            if(proximoId==null){
+                return "2000";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HistorialUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cnn.cerrarConexion();
+        }
+        return proximoId;
+    }
 }

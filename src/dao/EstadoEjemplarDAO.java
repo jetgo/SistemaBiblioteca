@@ -7,7 +7,7 @@ package dao;
 
 import conexion.Conexion;
 import modelo.EstadoEjemplar;
-import interfaces.Obligacion;
+import interfaces.ModeloDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author David
  */
-public class EstadoEjemplarDAO implements Obligacion<EstadoEjemplar>{
+public class EstadoEjemplarDAO implements ModeloDAO<EstadoEjemplar>{
     
     private static final String SQL_INSERT=
             "INSERT INTO estadoEjemplar "
