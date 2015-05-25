@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package conexion;
+import funcion.Mensaje;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,9 +21,11 @@ public class Conexion {
     private Conexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver"); //definir el Driver
-            cnn=DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca?zeroDateTimeBehavior=convertToNull", "root", "mysql");
+            cnn = DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca?zeroDateTimeBehavior=convertToNull", "root", "mysql");
         } catch (ClassNotFoundException | SQLException ex) {
+            
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            
         } finally {
             //System.out.println("Conexion Arriba...");
         }

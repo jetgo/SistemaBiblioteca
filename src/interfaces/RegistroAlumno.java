@@ -5,6 +5,9 @@
  */
 package interfaces;
 
+import java.util.ArrayList;
+import modelo.PreguntaSecreta;
+
 /**
  *
  * @author David
@@ -13,7 +16,7 @@ public interface RegistroAlumno {
     public boolean recibeRut(Object rut);
     public boolean recibeNombreCompleto(Object nombre, Object apellido);
     public boolean recibeCorreo(Object correo);
-    public boolean recibePassword (Object password, Object repetirPassword);
+    public boolean recibePassword (Object password);
     public boolean recibeRespuesta (Object pregunta, Object respuesta);
-    public void registrarAlumno();
+    public boolean registrarAlumno();
 }

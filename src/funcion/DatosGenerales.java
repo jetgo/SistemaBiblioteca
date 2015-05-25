@@ -5,6 +5,9 @@
  */
 package funcion;
 
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -31,4 +34,5 @@ public class DatosGenerales {
     public static String actualHoraFecha(){
         return "NADA";
     }
+    
 }

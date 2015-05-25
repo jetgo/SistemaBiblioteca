@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package controlador;
 
-import controlador.ControladorLogin;
+import vista.PrincipalGUI;
 
 /**
  *
  * @author David
  */
-public interface General {
-    public abstract void cerrarSession();
-    public abstract void mantenerUsuario();
+public class MantenedorUsuario {
+    
+    private vista.MantenedorUsuarioGUI ventanaMantenedorUsuario;
+    
+ 
+    
 }

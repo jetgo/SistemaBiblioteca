@@ -5,32 +5,41 @@
  */
 package vista;
 
+import controlador.Coordinador;
 import controlador.Main;
-import controlador.Iniciar;
+import controlador.ControladorLogin;
+import dao.PreguntaSecretaDAO;
+import funcion.Mensaje;
 import interfaces.RegistroAlumno;
 import interfaces.Validacion;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-//import clase.Usuario;
+//import clase.MantenedorUsuario;
 import javax.swing.JOptionPane;
+import modelo.Persona;
+import modelo.PreguntaSecreta;
+import modelo.Usuario;
 /**
  *
  * @author David
  */
-public class Login extends javax.swing.JFrame {
+public class LoginGUI extends javax.swing.JFrame {
 
-    private Iniciar controlLogin;
-    
+    private Coordinador controlCoordinador;
+    private Usuario miUsuario;
+    private Persona miPersona;
+
     /**
      * Creates new form Login
      */
-    public Login( Iniciar controlInicio) {
+    public LoginGUI( ) {
         initComponents();
-        this.controlLogin = controlInicio;
     }
 
-    
+    public void setCoordinador(Coordinador controlTotal) {
+            this.controlCoordinador = controlTotal;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -105,8 +114,6 @@ public class Login extends javax.swing.JFrame {
 
         lblRespuesta.setText("Respuesta Secreta :");
 
-        cbbPregunta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout pnlRegistroAlumnoLayout = new javax.swing.GroupLayout(pnlRegistroAlumno);
         pnlRegistroAlumno.setLayout(pnlRegistroAlumnoLayout);
         pnlRegistroAlumnoLayout.setHorizontalGroup(
@@ -128,7 +135,7 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(txtApellido)
                         .addContainerGap())
                     .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
-                        .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
                                 .addComponent(lblCorreo)
                                 .addGap(24, 24, 24)
@@ -148,7 +155,7 @@ public class Login extends javax.swing.JFrame {
                                 .addGap(20, 20, 20)
                                 .addGroup(pnlRegistroAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbbPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cbbPregunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 24, Short.MAX_VALUE))))
             .addGroup(pnlRegistroAlumnoLayout.createSequentialGroup()
                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -295,13 +302,21 @@ public class Login extends javax.swing.JFrame {
     public void setVisiblePanelAlumno(boolean valor){
         pnlRegistroAlumno.setVisible(valor);
     }
+    
+    public void setPreguntaSecreta(ArrayList<PreguntaSecreta> preguntas){
+        cbbPregunta.addItem("Seleccione una Pregunta:");
+        for (int i = 0; i < preguntas.size(); i++) {
+            cbbPregunta.addItem(preguntas.get(i).getPreSecDescripcion());
+        }        
+    }
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
-        if(controlLogin.recibeRut(txtRutUsuario.getText())){
-            if (controlLogin.recibePassword(String.valueOf(txtPasswordUsuario.getPassword()))) {
-                controlLogin.iniciarSesion();
-            }
-        }   
+        
+        miUsuario = new Usuario();
+        miUsuario.setPerRut(txtRutUsuario.getText());
+        miUsuario.setUsuClave(String.valueOf(txtPasswordUsuario.getPassword()));
+        controlCoordinador.ingresoSistema(miUsuario);
+
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
     private void btnFormularioRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormularioRegistroActionPerformed
@@ -319,21 +334,31 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFormularioRegistroActionPerformed
 
     private void btnRecuperarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecuperarPasswordActionPerformed
-        controlLogin.iniciarRecuperar();
+
+        controlCoordinador.setInterfazRecuperar(controlCoordinador.getInterfazRecuperar());   //controlCoordinador.getInterfazRecuperar()
+        
     }//GEN-LAST:event_btnRecuperarPasswordActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if(controlLogin.recibeRut(txtRut.getText())){
-            if(controlLogin.recibeNombreCompleto(txtNombre.getText(), txtApellido.getText())){
-                if(controlLogin.recibeCorreo(txtCorreo.getText())){
-                    if(controlLogin.recibePassword(String.valueOf(txtPassword.getPassword()), String.valueOf(txtRepetirPassword.getPassword()))){
-                        if(controlLogin.recibeRespuesta("11", txtRespuesta.getText())){
-                            controlLogin.registrarAlumno();
-                        }
-                    }
-                }
-            }
-        }       
+        if(String.valueOf(txtPassword.getPassword()).equals(String.valueOf(txtRepetirPassword.getPassword()))){
+            miUsuario = new Usuario();
+            miPersona = new Persona();
+            miUsuario.setPerRut(txtRut.getText());
+            
+            miPersona.setPerNombre(txtNombre.getText());
+            miPersona.setPerApellidoPaterno(txtApellido.getText());
+            miPersona.setPerCorreo(txtCorreo.getText());
+            miUsuario.setUsuClave(String.valueOf(txtPassword.getPassword()));
+            miUsuario.setPreSecId(String.valueOf(cbbPregunta.getSelectedIndex()));
+            miUsuario.setUsuRespuesta(txtRespuesta.getText());
+            controlCoordinador.crearAlumno(miUsuario, miPersona);
+        } else {
+            Mensaje.informacionAdvertencia("Debe repetir la misma Contraseña");
+        }
+        
+        miUsuario = null;
+        miPersona = null;
+    
     }//GEN-LAST:event_btnRegistrarActionPerformed
     
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -357,13 +382,13 @@ public class Login extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //        //</editor-fold>
@@ -373,7 +398,7 @@ public class Login extends javax.swing.JFrame {
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new Login().setVisible(true);
+//                new LoginGUI().setVisible(true);
 //            }
 //        });
 //    }

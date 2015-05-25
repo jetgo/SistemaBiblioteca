@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controlador;
+package funcion;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -38,32 +38,52 @@ public class ManejoSesion {
             pw=new PrintWriter(bw);
 
             pw.println(usuario);
-            pw.println(",");
             pw.print(fechaCreacion);
             pw.close();
             bw.close();
             fw.close();
-            
+            System.out.println("Archivo ha sido Escrito Correctamente");
         } catch (IOException ex) {
-            System.out.println("Algo malo paso en la escritura del Archivo");
+            System.out.println("Algo malo paso en la escritura del Archivo "+ex.toString());
         }
     }
     
-    public static void recuperarSesion(String nombre){
+
+    
+    
+    public static String[] leerSesion(){
         
         File session;
         BufferedReader br;
         FileReader fr;
+        String[] miDato=new String[3];
+        session=new File("session.txt");
+        if(!session.exists()){
+//            try{
+//                session.createNewFile();
+//                System.out.println(session.getName()+" ha sido creado vacio");
+//            } catch (IOException ex){
+//                ex.printStackTrace();
+//            }
+            miDato = null;
+        }
         try{
-            session=new File("session.txt");
             fr = new FileReader(session);
             br = new BufferedReader(fr);
             
+            String linea;
+            int i=0;
+            while ((linea=br.readLine())!=null) {  
+                miDato[i]=linea;
+                i++;
+            }
             
             br.close();
             fr.close();
-        } catch (Exception e) {
-            System.out.println("UN ERROR EN LA LECTURA");
+            System.out.println("Archivo ha sido Leido Correctamente");
+        } catch (IOException ex) {
+            System.out.println("UN ERROR EN LA LECTURA"+ex.toString());
         }
+        return miDato;
     }
 }

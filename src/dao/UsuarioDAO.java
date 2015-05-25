@@ -28,7 +28,7 @@ public class UsuarioDAO implements ModeloDAO<Usuario>{
             + "VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE=
             "UPDATE usuario "
-            + "SET perRut=?, tipUsuId=?, estUsuId=?, preSecId=?, usuAlias=?, usuClave=?, usuRespuesta=?, usuHoraRegistro=?, usuFechaRegistro=?  "
+            + "SET perRut=?, tipUsuId=?, estUsuId=?, preSecId=?, usuAlias=?, usuClave=?, usuRespuesta=?  "
             + "WHERE usuId=?";
     private static final String SQL_DELETE=
             "DELETE FROM usuario "
@@ -48,7 +48,7 @@ public class UsuarioDAO implements ModeloDAO<Usuario>{
             + "FROM usuario";
     
     
-    private static final Conexion cnn=Conexion.estado();
+    private static final Conexion cnn = Conexion.estado();
     
     @Override
     public boolean create(Usuario c) {
@@ -86,16 +86,14 @@ public class UsuarioDAO implements ModeloDAO<Usuario>{
         
         try {
             pst=cnn.getCnn().prepareStatement(SQL_UPDATE);
-            pst.setString(1, c.getTipUsuId());
-            pst.setString(2, c.getEstUsuId());
-            pst.setString(3, c.getPerRut());            
+            pst.setString(1, c.getPerRut());
+            pst.setString(2, c.getTipUsuId());
+            pst.setString(3, c.getEstUsuId());
             pst.setString(4, c.getPreSecId());
             pst.setString(5, c.getUsuAlias());
             pst.setString(6, c.getUsuClave());
             pst.setString(7, c.getUsuRespuesta());
-            pst.setString(8, c.getUsuFechaRegistro());
-            pst.setString(9, c.getUsuHoraRegistro());
-            pst.setString(10, c.getUsuId());
+            pst.setString(8, c.getUsuId());
             if(pst.executeUpdate()>0){
                 return true;
             }

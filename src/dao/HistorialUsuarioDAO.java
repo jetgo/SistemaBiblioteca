@@ -51,13 +51,13 @@ public class HistorialUsuarioDAO implements ModeloDAO<HistorialUsuario>{
         
         PreparedStatement pst;
         try {
-            pst=cnn.getCnn().prepareStatement(SQL_INSERT);
+            pst = cnn.getCnn().prepareStatement(SQL_INSERT);
             pst.setString(1, c.getHisUsuId());
             pst.setString(2, c.getUsuId());
             pst.setString(3, c.getHisUsuDescripcion());
             pst.setString(4, c.getHisUsuHoraRegistro());
             pst.setString(5, c.getHisUsuFechaRegistro());
-            if(pst.executeUpdate()>0)
+            if(pst.executeUpdate() > 0)
             {
                 return true;
             }    
@@ -93,8 +93,9 @@ public class HistorialUsuarioDAO implements ModeloDAO<HistorialUsuario>{
 
     @Override
     public boolean delete(Object llave) {
+        PreparedStatement pst;
         try {
-            PreparedStatement pst;
+            
             pst = cnn.getCnn().prepareStatement(SQL_DELETE);
             pst.setString(1, llave.toString());
             

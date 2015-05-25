@@ -9,9 +9,9 @@ package interfaces;
  * @author David
  */
 public interface Validacion {
-    public boolean recibeRut(Object rut);
-    public boolean recibePassword(Object password);
-    public void iniciarSesion();
-    public void recuperarPassword();
+    public boolean recibeRut(Object miUsuario);
+    public boolean recibePassword(Object miUsuario);
+    public boolean iniciarSesion();
+    public boolean validarDatosSecretos();
 
 }
